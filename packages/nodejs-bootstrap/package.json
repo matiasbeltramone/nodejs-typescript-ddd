@@ -21,7 +21,38 @@
     "lib"
   ],
   "scripts": {
-    "tsc": "tsc",
-    "test": "echo \"Error: run tests from root\" && exit 1"
+    "start": "yarn run build && yarn run watch",
+    "build": "rm -rf ./lib/* && yarn run build-ts && yarn run tslint",
+    "watch-node": "nodemon ./lib/server.js",
+    "watch-ts": "tsc -w",
+    "watch": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"yellow.bold,green.bold\"  \"yarn run watch-ts\" \"yarn run watch-node\"",
+    "build-ts": "tsc",
+    "tslint": "tslint -c tslint.json -p tsconfig.json"
+  },
+  "devDependencies": {
+    "@types/body-parser": "^1.17.0",
+    "@types/cors": "^2.8.4",
+    "@types/dotenv": "^6.1.1",
+    "@types/express": "^4.16.1",
+    "@types/helmet": "^0.0.43",
+    "@types/morgan": "^1.7.35",
+    "@types/request": "^2.48.1",
+    "morgan": "^1.9.1",
+    "tslint": "^5.15.0",
+    "tslint-config-prettier": "^1.18.0"
+  },
+  "dependencies": {
+    "@types/config": "^0.0.34",
+    "@types/inversify": "^2.0.33",
+    "@types/reflect-metadata": "^0.1.0",
+    "body-parser": "^1.18.3",
+    "config": "^3.1.0",
+    "cors": "^2.8.5",
+    "dotenv": "^7.0.0",
+    "express": "^4.16.4",
+    "helmet": "^3.16.0",
+    "inversify": "^5.0.1",
+    "reflect-metadata": "^0.1.13",
+    "request": "^2.88.0"
   }
 }

@@ -1,11 +1,3 @@
-# `nodejs-bootstrap`
+# API Bootstrap
 
-> TODO: description
-
-## Usage
-
-```
-const nodejsBootstrap = require('nodejs-bootstrap');
-
-// TODO: DEMONSTRATE API
-```
+Project scaffold with: Express Microframework + Typescript + POO + Onion Architecture + Testing .

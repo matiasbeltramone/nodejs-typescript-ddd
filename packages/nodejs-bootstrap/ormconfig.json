@@ -1,0 +1,16 @@
+{
+  "type": "mysql",
+  "host": "localhost",
+  "port": 3306,
+  "username": "deckard",
+  "password": "password",
+  "database": "aemon",
+  "synchronize": true,
+  "logging": false,
+  "entities": [
+    "lib/Domain/Entities/**/*.js"
+  ],
+  "migrations": [
+    "lib/Persistence/TypeORM/Migrations/**/*.js"
+  ]
+}

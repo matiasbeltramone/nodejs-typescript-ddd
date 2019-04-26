@@ -5,12 +5,16 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 import routes from './routes';
 import * as errorHandler from './utils/errorHandler';
+import DatabaseConnection from "./Persistence/DatabaseConnection";
+import {Connection} from "typeorm";
 
 class App {
   public app: express.Application;
+  public connection: Connection;
 
   constructor() {
     this.app = express();
+    this.setDatabaseConnection();
     this.setMiddlewares();
     this.setRoutes();
     this.catchErrors();
@@ -31,6 +35,11 @@ class App {
   private catchErrors(): void {
     this.app.use(errorHandler.notFound);
     this.app.use(errorHandler.internalServerError);
+  }
+
+  private async setDatabaseConnection() {
+    const dbConnection = new DatabaseConnection();
+    await dbConnection.getConnection();
   }
 }
 

@@ -1,25 +1,17 @@
 import IUserRepository from "../../../Domain/Interfaces/IUserRepository";
 import User from "../../../Domain/Entities/User";
 import { injectable } from "inversify";
+import {getManager, Repository} from "typeorm";
 
 @injectable()
 export default class MockUserRepository implements IUserRepository {
-  public findAll(): User[] {
-    const sender = new User(
-      "Matias",
-      "Beltramone",
-      24
-    );
+  private userRepository: Repository<User>;
 
-    const receiver = new User(
-      "Matias",
-      "Beltramone",
-      24
-    );
+  constructor() {
+    this.userRepository = getManager().getRepository(User)
+  }
 
-    return [
-      sender,
-      receiver
-    ];
+  public async findAll(): Promise<User[]> {
+    return await this.userRepository.find();
   }
 }

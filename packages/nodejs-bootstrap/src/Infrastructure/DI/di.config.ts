@@ -7,6 +7,7 @@ import StoreUsersAction from "../../API/Http/Actions/Users/StoreUsersAction";
 import ShowUsersAction from "../../API/Http/Actions/Users/ShowUsersAction";
 import UpdateUsersAction from "../../API/Http/Actions/Users/UpdateUsersAction";
 import DestroyUsersAction from "../../API/Http/Actions/Users/DestroyUsersAction";
+import TypeUserRepository from "../../Persistence/TypeORM/Repositories/TypeUserRepository";
 
 const DIContainer = new Container();
 
@@ -16,6 +17,6 @@ DIContainer.bind<ShowUsersAction>(ShowUsersAction).toSelf();
 DIContainer.bind<UpdateUsersAction>(UpdateUsersAction).toSelf();
 DIContainer.bind<DestroyUsersAction>(DestroyUsersAction).toSelf();
 
-DIContainer.bind<IUserRepository>(TYPES.IUserRepository).to(MockUserRepository);
+DIContainer.bind<IUserRepository>(TYPES.IUserRepository).to(TypeUserRepository);
 
 export default DIContainer;

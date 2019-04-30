@@ -61,7 +61,7 @@ export function success(data: any, details: string) {
  *   ]
  * }
  */
-export function error(type: any, details: string, code: string, href: string) {
+export function error(type: any, code: string, details: string, href: string) {
   return {
     errors: {
       type,

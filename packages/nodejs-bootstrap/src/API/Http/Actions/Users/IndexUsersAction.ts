@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { error, success } from "../../../../utils/customResponse";
 import IUserRepository from "../../../../Domain/Interfaces/IUserRepository";
 import {inject, injectable} from "inversify";
-import {TYPES} from "../../../../Infrastructure/DI/types";
+import {INTERFACES} from "../../../../Infrastructure/DI/interfaces.types";
 import GetAllUsersPresenter from "../../Presenters/Users/GetAllUsersPresenter";
 import {HTTP_CODES} from "../../Enums/HttpStatuses";
 
@@ -10,7 +10,7 @@ import {HTTP_CODES} from "../../Enums/HttpStatuses";
 export default class IndexUsersAction {
   private userRepository: IUserRepository;
 
-  constructor(@inject(TYPES.IUserRepository) userRepository: IUserRepository) {
+  constructor(@inject(INTERFACES.IUserRepository) userRepository: IUserRepository) {
       this.userRepository = userRepository;
   }
 
@@ -21,7 +21,7 @@ export default class IndexUsersAction {
       const getAllPresenter = new GetAllUsersPresenter(users);
 
       return response.status(HTTP_CODES.OK).json(
-        success(getAllPresenter.getData(), 'IndexUsersAction: List of users retrieved')
+        success(getAllPresenter.getData(), 'IndexUsersAction: Users has been retrieved')
       );
     } catch (e) {
       return response.status(HTTP_CODES.ERROR).json(

@@ -1,5 +1,5 @@
-const TYPES = {
+const INTERFACES = {
   IUserRepository: Symbol.for("IUserRepository")
 };
 
-export { TYPES };
+export { INTERFACES };

@@ -1,6 +1,6 @@
 import IUserRepository from "../../../Domain/Interfaces/IUserRepository";
 import {inject, injectable} from "inversify";
-import {TYPES} from "../../../Infrastructure/DI/types";
+import {INTERFACES} from "../../../Infrastructure/DI/interfaces.types";
 import ShowUsersCommand from "../../Commands/Users/ShowUsersCommand";
 import User from "../../../Domain/Entities/User";
 import EntityNotFoundException from "../../Exceptions/EntityNotFoundException";
@@ -9,7 +9,7 @@ import EntityNotFoundException from "../../Exceptions/EntityNotFoundException";
 export default class ShowUserHandler {
   private userRepository: IUserRepository;
 
-  constructor(@inject(TYPES.IUserRepository) userRepository: IUserRepository) {
+  constructor(@inject(INTERFACES.IUserRepository) userRepository: IUserRepository) {
     this.userRepository = userRepository;
   }
 

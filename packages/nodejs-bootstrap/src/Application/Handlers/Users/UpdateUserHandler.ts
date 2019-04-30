@@ -1,6 +1,6 @@
 import IUserRepository from "../../../Domain/Interfaces/IUserRepository";
 import {inject, injectable} from "inversify";
-import {TYPES} from "../../../Infrastructure/DI/types";
+import {INTERFACES} from "../../../Infrastructure/DI/interfaces.types";
 import UpdateUserCommand from "../../Commands/Users/UpdateUserCommand";
 import User from "../../../Domain/Entities/User";
 
@@ -8,7 +8,7 @@ import User from "../../../Domain/Entities/User";
 export default class UpdateUserHandler {
   private userRepository: IUserRepository;
 
-  constructor(@inject(TYPES.IUserRepository) userRepository: IUserRepository) {
+  constructor(@inject(INTERFACES.IUserRepository) userRepository: IUserRepository) {
     this.userRepository = userRepository;
   }
 

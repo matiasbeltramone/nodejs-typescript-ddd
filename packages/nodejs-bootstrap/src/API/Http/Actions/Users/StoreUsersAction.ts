@@ -29,7 +29,7 @@ export default class StoreUsersAction {
       const presenter = new StoreUserPresenter(result);
 
       return response.status(HTTP_CODES.CREATED).json(
-        success(presenter.getData(), 'StoreUsersAction: User was created')
+        success(presenter.getData(), 'StoreUsersAction: User has been created')
       );
     } catch (e) {
       if (e instanceof BadRequestException) {

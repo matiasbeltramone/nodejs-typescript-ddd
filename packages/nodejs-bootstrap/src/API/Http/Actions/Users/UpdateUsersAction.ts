@@ -29,7 +29,7 @@ export default class UpdateUsersAction {
       const presenter = new UpdateUserPresenter(result);
 
       return response.status(HTTP_CODES.OK).json(
-        success(presenter.getData(), 'UpdateUsersAction: User was updated')
+        success(presenter.getData(), 'UpdateUsersAction: User has been updated')
       );
     } catch (e) {
       if (e instanceof BadRequestException) {

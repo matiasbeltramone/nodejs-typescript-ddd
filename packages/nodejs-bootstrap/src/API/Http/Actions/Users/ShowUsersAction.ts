@@ -30,7 +30,7 @@ export default class ShowUsersAction {
       const presenter = new GetUserPresenter(result);
 
       return response.status(HTTP_CODES.OK).json(
-        success(presenter.getData(), 'ShowUsersAction: User retrieved')
+        success(presenter.getData(), 'ShowUsersAction: User has been retrieved')
       );
     } catch (e) {
       if (e instanceof BadRequestException) {

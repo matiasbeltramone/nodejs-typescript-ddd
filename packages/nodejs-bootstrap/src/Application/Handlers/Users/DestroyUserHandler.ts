@@ -1,6 +1,6 @@
 import IUserRepository from "../../../Domain/Interfaces/IUserRepository";
 import {inject, injectable} from "inversify";
-import {TYPES} from "../../../Infrastructure/DI/types";
+import {INTERFACES} from "../../../Infrastructure/DI/interfaces.types";
 import DestroyUserCommand from "../../Commands/Users/DestroyUserCommand";
 import EntityNotFoundException from "../../Exceptions/EntityNotFoundException";
 import CannotDeleteEntity from "../../Exceptions/CannotDeleteEntity";
@@ -9,7 +9,7 @@ import CannotDeleteEntity from "../../Exceptions/CannotDeleteEntity";
 export default class DestroyUserHandler {
   private userRepository: IUserRepository;
 
-  constructor(@inject(TYPES.IUserRepository) userRepository: IUserRepository) {
+  constructor(@inject(INTERFACES.IUserRepository) userRepository: IUserRepository) {
     this.userRepository = userRepository;
   }
 

@@ -1,5 +1,5 @@
 import { Container } from "inversify";
-import { TYPES } from "./types";
+import { INTERFACES } from "./interfaces.types";
 import IUserRepository from "../../Domain/Interfaces/IUserRepository";
 import IndexUsersAction from "../../API/Http/Actions/Users/IndexUsersAction";
 import StoreUsersAction from "../../API/Http/Actions/Users/StoreUsersAction";
@@ -46,6 +46,6 @@ DIContainer.bind<DestroyUserHandler>(DestroyUserHandler).toSelf();
 /**
  * Repository Interfaces
  */
-DIContainer.bind<IUserRepository>(TYPES.IUserRepository).to(TypeUserRepository);
+DIContainer.bind<IUserRepository>(INTERFACES.IUserRepository).to(TypeUserRepository);
 
 export default DIContainer;

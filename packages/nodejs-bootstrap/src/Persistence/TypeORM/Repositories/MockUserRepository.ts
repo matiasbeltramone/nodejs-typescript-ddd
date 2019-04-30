@@ -22,4 +22,16 @@ export default class MockUserRepository implements IUserRepository {
       receiver
     ]);
   }
+
+  public async findOneById(id: number): Promise<User> {
+    return undefined;
+  }
+
+  public async persist(user: User): Promise<User> {
+    return undefined;
+  }
+
+  public async destroy(user: User): Promise<boolean> {
+    return undefined;
+  }
 }

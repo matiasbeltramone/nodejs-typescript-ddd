@@ -14,4 +14,18 @@ export default class TypeUserRepository implements IUserRepository {
   public async findAll(): Promise<User[]> {
     return await this.userRepository.find();
   }
+
+  public async findOneById(id: number): Promise<User> {
+    return await this.userRepository.findOne(id);
+  }
+
+  public async persist(user: User): Promise<User> {
+    return await this.userRepository.save(user);
+  }
+
+  public async destroy(user: User): Promise<boolean> {
+    const result = await this.userRepository.delete(user.getId());
+
+    return (result && result.affected === 1);
+  }
 }

@@ -17,6 +17,10 @@ export default class User {
     this.age = age;
   }
 
+  public getId(): number {
+    return this.id;
+  }
+
   public getName(): string {
     return this.name;
   }
@@ -27,5 +31,17 @@ export default class User {
 
   public getAge(): number {
     return this.age;
+  }
+
+  public setName(name: string): void {
+    this.name = name;
+  }
+
+  public setSurname(surname: string): void {
+    this.surname = surname;
+  }
+
+  public setAge(age: number): void {
+    this.age = age;
   }
 }

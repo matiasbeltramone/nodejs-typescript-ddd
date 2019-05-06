@@ -16,7 +16,7 @@ export default class ShowUserHandler {
   public async execute(command: ShowUsersCommand): Promise<User> {
     const user = await this.userRepository.findOneById(command.getId());
 
-    if (!user) {
+    if (! user) {
       throw new EntityNotFoundException(`User with id: ${command.getId()} not found`);
     }
 

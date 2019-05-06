@@ -1,8 +1,9 @@
-export default class CannotDeleteEntity extends Error {
+import ApplicationError from "./ApplicationError";
+
+export default class CannotDeleteEntity extends ApplicationError {
   constructor(message?: string) {
-    super(message);
+    super(CannotDeleteEntity.name, message);
 
     Object.setPrototypeOf(this, new.target.prototype);
-    this.name = CannotDeleteEntity.name;
   }
 }

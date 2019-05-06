@@ -24,14 +24,20 @@ export default class MockUserRepository implements IUserRepository {
   }
 
   public async findOneById(id: number): Promise<User> {
-    return undefined;
+    const users = await this.findAll();
+
+    return users[0];
   }
 
   public async persist(user: User): Promise<User> {
-    return undefined;
+    return new User(
+      "Juli",
+      "Raviola",
+      24
+    );
   }
 
   public async destroy(user: User): Promise<boolean> {
-    return undefined;
+    return Promise.resolve(true);
   }
 }

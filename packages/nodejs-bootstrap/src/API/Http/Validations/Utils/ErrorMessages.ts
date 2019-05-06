@@ -1,4 +1,30 @@
 export const codeErrors = {
+  HTTP: {
+    BAD_REQUEST: {
+      code: 'BAD_REQUEST',
+      href: 'www.example.com/#BAD_REQUEST'
+    },
+    UNPROCESSABLE_ENTITY: {
+      code: 'UNPROCESSABLE_ENTITY',
+      href: 'www.example.com/#UNPROCESSABLE_ENTITY'
+    },
+    UNAUTHORIZED: {
+      code: 'UNAUTHORIZED',
+      href: 'www.example.com/#UNAUTHORIZED'
+    },
+    FORBIDDEN: {
+      code: 'FORBIDDEN',
+      href: 'www.example.com/#FORBIDDEN'
+    },
+    NOT_FOUND: {
+      code: 'NOT_FOUND',
+      href: 'www.example.com/#NOT_FOUND'
+    },
+    INTERNAL_ERROR: {
+      code: 'INTERNAL_ERROR',
+      href: 'www.example.com/#INTERNAL_ERROR'
+    }
+  },
   EMPTY: {
     code: 'E0000',
     message: 'Value should not be empty',

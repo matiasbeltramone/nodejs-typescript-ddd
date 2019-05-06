@@ -1,8 +1,8 @@
 import ApplicationError from "./ApplicationError";
 
-export default class EntityNotFoundException extends ApplicationError {
+export default class ValidationException extends ApplicationError {
   constructor(message: string) {
-    super(EntityNotFoundException.name, message);
+    super(ValidationException.name, message);
 
     Object.setPrototypeOf(this, new.target.prototype);
   }

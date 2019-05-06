@@ -16,10 +16,14 @@ export default class Validator {
   public validationResult(errors: any) {
     const usefulErrors: any = {
       errors: {},
-      type: 'BadRequestException',
+      type: 'UnprocessableEntity',
     };
 
     errors.map((error: any) => {
+      if (error.type === 'E0001') {
+        usefulErrors.type = 'BadRequestException'
+      }
+
       if (!usefulErrors.errors.hasOwnProperty(error.path.join('_'))) {
         usefulErrors.errors[error.path.join('_')] = {
           field: error.path.join('_'),

@@ -16,7 +16,7 @@ export default class DestroyUserHandler {
   public async execute(command: DestroyUserCommand): Promise<boolean> {
     const user = await this.userRepository.findOneById(command.getId());
 
-    if (!user) {
+    if (! user) {
       throw new EntityNotFoundException(`User with id: ${command.getId()} not found`);
     }
 

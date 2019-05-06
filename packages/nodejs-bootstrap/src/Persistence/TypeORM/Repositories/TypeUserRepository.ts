@@ -1,30 +1,24 @@
 import IUserRepository from "../../../Domain/Interfaces/IUserRepository";
 import User from "../../../Domain/Entities/User";
 import { injectable } from "inversify";
-import {getManager, Repository} from "typeorm";
+import TypeRepository from "./TypeRepository";
 
 @injectable()
-export default class TypeUserRepository implements IUserRepository {
-  private userRepository: Repository<User>;
-
-  constructor() {
-    this.userRepository = getManager().getRepository(User)
-  }
-
+export default class TypeUserRepository extends TypeRepository implements IUserRepository {
   public async findAll(): Promise<User[]> {
-    return await this.userRepository.find();
+    return await this.repository(User).find();
   }
 
   public async findOneById(id: number): Promise<User> {
-    return await this.userRepository.findOne(id);
+    return await this.repository(User).findOne(id);
   }
 
   public async persist(user: User): Promise<User> {
-    return await this.userRepository.save(user);
+    return await this.repository(User).save(user);
   }
 
   public async destroy(user: User): Promise<boolean> {
-    const result = await this.userRepository.delete(user.getId());
+    const result = await this.repository(User).delete(user.getId());
 
     return (result && result.affected === 1);
   }

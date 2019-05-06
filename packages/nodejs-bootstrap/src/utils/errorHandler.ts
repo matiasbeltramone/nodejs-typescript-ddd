@@ -1,20 +1,64 @@
-import { Request, Response, NextFunction } from "express";
-import { error } from "./customResponse";
+import {Request, Response, NextFunction} from "express";
+import {error} from "./customResponse";
+import EntityNotFoundException from "../Application/Exceptions/EntityNotFoundException";
+import NotFoundException from "../API/Http/Exceptions/NotFoundException";
+import {HTTP_CODES} from "../API/Http/Enums/HttpStatuses";
+import {codeErrors} from "../API/Http/Validations/Utils/ErrorMessages";
+import InternalErrorException from "../API/Http/Exceptions/InternalErrorException";
+import ValidationException from "../Application/Exceptions/ValidationException";
+import BadRequestException from "../API/Http/Exceptions/BadRequestException";
+import UnprocessableEntityException from "../API/Http/Exceptions/UnprocessableEntityException";
 
-export const notFound = (request: Request, response: Response, next: NextFunction) => {
-  response.status(404)
-    .json(
-      error('NotFoundException', 'ERR-0000', 'Resource not found', 'www.example.com/#ERR-0000')
-    )
-    .end();
+export const mapApplicationToHTTPErrors = async (e: any, request: Request, response: Response, next: NextFunction) => {
+  if (e instanceof EntityNotFoundException) {
+    e = new NotFoundException(
+      e.message,
+      HTTP_CODES.NOT_FOUND,
+      codeErrors.HTTP.NOT_FOUND.code,
+      codeErrors.HTTP.NOT_FOUND.href
+    );
+
+    return next(e);
+  }
+
+  if (e instanceof ValidationException) {
+    if ((JSON.parse(e.message)).type === 'BadRequestException') {
+      e = new BadRequestException(
+        e.message,
+        HTTP_CODES.BAD_REQUEST,
+        codeErrors.HTTP.BAD_REQUEST.code,
+        codeErrors.HTTP.BAD_REQUEST.href
+      );
+    }
+
+    e = new UnprocessableEntityException(
+      e.message,
+      HTTP_CODES.UNPROCESSABLE_ENTITY,
+      codeErrors.HTTP.UNPROCESSABLE_ENTITY.code,
+      codeErrors.HTTP.UNPROCESSABLE_ENTITY.href
+    );
+
+    return next(e);
+  }
+
+  e = new InternalErrorException(
+    e.message,
+    HTTP_CODES.INTERNAL_ERROR,
+    codeErrors.HTTP.INTERNAL_ERROR.code,
+    codeErrors.HTTP.INTERNAL_ERROR.href
+  );
+
+  return next(e);
 };
 
-export const internalServerError = (err: any, request: Request, response: Response, next: NextFunction) => {
-  console.log(err);
+export const execute = async (e: any, request: Request, response: Response, next: NextFunction) => {
+  if (e instanceof BadRequestException || e instanceof UnprocessableEntityException) {
+    return response.status(e.status).json(
+      error(e.name, JSON.parse(e.message), e.type, e.href),
+    );
+  }
 
-  response.status(500)
-    .json(
-      error('InternalServerError', 'ERR-0001', 'Whoops something was wrong', 'www.example.com/#ERR-0001')
-    )
-    .end();
+  return response.status(e.status).json(
+    error(e.name, e.message, e.type, e.href),
+  );
 };

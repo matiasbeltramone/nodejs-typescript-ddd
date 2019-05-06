@@ -3,6 +3,7 @@ import {inject, injectable} from "inversify";
 import {INTERFACES} from "../../../Infrastructure/DI/interfaces.types";
 import UpdateUserCommand from "../../Commands/Users/UpdateUserCommand";
 import User from "../../../Domain/Entities/User";
+import EntityNotFoundException from "../../Exceptions/EntityNotFoundException";
 
 @injectable()
 export default class UpdateUserHandler {
@@ -14,6 +15,10 @@ export default class UpdateUserHandler {
 
   public async execute(command: UpdateUserCommand): Promise<User> {
     const user = await this.userRepository.findOneById(command.getId());
+
+    if (! user) {
+      throw new EntityNotFoundException(`User with id: ${command.getId()} not found`);
+    }
 
     user.setName(command.getName());
     user.setSurname(command.getSurname());

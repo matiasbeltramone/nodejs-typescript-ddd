@@ -24,9 +24,3 @@ En este paquete es un boostraping para utilizar como base de diferentes proyecto
 - Arquitectura Hexagonal (Previo a CQRS: Implementando capas de Infrastructura, Aplicación, Dominio, Presentación/API)
 - ORM implementado mediante TypeORM utilizando el patrón DataMapper.
 - Validaciones mediante JOI.
-
-#### Package Frontend:
-Pendiente.
-
-#### Package OAuth2:
-Pendiente.

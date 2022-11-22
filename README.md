@@ -30,5 +30,3 @@ Pendiente.
 
 #### Package OAuth2:
 Pendiente.
-
-Cualquier consulta realizarla al email: `mgbeltramone@gmail.com`
